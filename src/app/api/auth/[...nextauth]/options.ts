@@ -50,8 +50,8 @@ export const authOptions: NextAuthOptions = {
 
                     // Ensure that we return a valid object with 'id' (required by NextAuth)
                     return {
-                        id: user._id.toString(),  // Convert _id to string
-                        _id: user._id.toString(),
+                        id: user._id!.toString(),  // Convert _id to string
+                        _id: user._id!.toString(),
                         isVerified: user.isVerified,
                         isAcceptingMessages: user.isAcceptingMessages,
                         username: user.username,
@@ -81,14 +81,14 @@ export const authOptions: NextAuthOptions = {
                 session.user.username = token.username;
                 session.user.name = token.username;
                 session.user.email = token.email;
-                session.user.image = token.image || null;
+                session.user.image = token.image;
             }
             return session;
         },
 
         async jwt({ token, user }) {
             if (user) {
-                token._id = user._id.toString();  // Convert _id to string
+                token._id = user._id!.toString();  // Convert _id to string
                 token.isVerified = user.isVerified;
                 token.isAcceptingMessages = user.isAcceptingMessages;
                 token.username = user.username;

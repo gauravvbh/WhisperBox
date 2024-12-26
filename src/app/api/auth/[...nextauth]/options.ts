@@ -12,7 +12,7 @@ interface UserType {
     isAcceptingMessages: boolean;
     username: string;
     email: string;
-    image?: string | null;  // Optional image
+    // image?: string | null;  // Optional image
 }
 
 export const authOptions: NextAuthOptions = {
@@ -56,7 +56,7 @@ export const authOptions: NextAuthOptions = {
                         isAcceptingMessages: user.isAcceptingMessages,
                         username: user.username,
                         email: user.email,
-                        image: user.image || null,
+                        // image: user.image || null,
                     };
                 } catch (error: unknown) {
                     if (error instanceof Error) {
@@ -81,7 +81,7 @@ export const authOptions: NextAuthOptions = {
                 session.user.username = token.username;
                 session.user.name = token.username;
                 session.user.email = token.email;
-                session.user.image = token.image;
+                // session.user.image = token.image;
             }
             return session;
         },

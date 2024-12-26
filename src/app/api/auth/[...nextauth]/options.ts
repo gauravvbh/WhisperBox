@@ -4,11 +4,6 @@ import bcrypt from 'bcryptjs';
 import dbConnect from '@/lib/dbConnect';
 import UserModel from '@/Models/User';
 
-interface Credentials {
-    identifier: string;
-    password: string;
-}
-
 // Make sure to include the 'id' field required by NextAuth's User
 interface UserType {
     id: string;  // 'id' must be added to match the NextAuth User type
@@ -20,21 +15,12 @@ interface UserType {
     image?: string | null;  // Optional image
 }
 
-interface JWTToken {
-    _id: string;
-    isVerified: boolean;
-    isAcceptingMessages: boolean;
-    username: string;
-    email: string;
-    image?: string | null;
-}
-
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             id: "credentials",
             name: "Credentials",
-            async authorize(credentials: Record<"username" | "password", string> | undefined): Promise<UserType | null> {
+            async authorize(credentials: { username: string; password: string } | undefined): Promise<UserType | null> {
                 if (!credentials?.username || !credentials?.password) {
                     throw new Error("Missing credentials");
                 }
@@ -132,6 +118,7 @@ export const authOptions: NextAuthOptions = {
 
     secret: process.env.NEXTAUTH_SECRET_KEY as string,
 };
+
 
 
 

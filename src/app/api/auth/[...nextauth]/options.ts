@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
             id: "credentials",
             name: "Credentials",
             // The authorize function should return Promise<User | null>
-            async authorize(credentials: Record<"username" | "password", string> | undefined): Promise<User | null> {
+            async authorize(credentials: Record<"username" | "password", string> | undefined): Promise<UserType | null> {
                 await dbConnect();
                 console.log('credentials')
                 console.log(credentials)

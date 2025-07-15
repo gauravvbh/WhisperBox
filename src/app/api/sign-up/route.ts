@@ -67,6 +67,8 @@ export async function POST(request: NextRequest) {
             await newUser.save();
         }
         const emailResponse = await sendVerificationEmail(email, username, verifyCode);
+        console.log('emailResponse')
+        console.log(emailResponse)
         if (!emailResponse.success) {
             return NextResponse.json(
                 {

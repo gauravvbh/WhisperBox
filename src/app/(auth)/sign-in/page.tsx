@@ -23,7 +23,7 @@ const SignInPage = () => {
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      identifier: '',
+      username: '',
       password: ''
     }
   })
@@ -33,7 +33,7 @@ const SignInPage = () => {
     try {
       const result = await signIn('credentials', {
         redirect: false,
-        identifier: data.identifier,
+        username: data.username,
         password: data.password,
       });
       if (result?.error) {
@@ -78,7 +78,7 @@ const SignInPage = () => {
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
-            <FormField name='identifier' control={form.control} render={({ field }) => (
+            <FormField name='username' control={form.control} render={({ field }) => (
               <FormItem>
                 <FormControl>
                   <FormLabel>Email/Username</FormLabel>
